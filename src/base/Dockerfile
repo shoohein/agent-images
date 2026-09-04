@@ -25,11 +25,12 @@ RUN apt-get update \
 # - nodejs/python3: runtime for agent CLIs and helper scripts
 # - keep python3 only; pip/venv/dev headers are intentionally omitted
 # - git/sudo/jq: repository and shell operations
+# - openssh-client: ssh/ssh-agent/ssh-add for git@github.com push via agent forwarding
 # - file/ripgrep/fd-find/less/tree: investigation and navigation
 # - make/zip/unzip/time: build, packaging, and profiling helpers
 RUN apt-get update \
     && DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
-        nodejs python3 git sudo jq \
+        nodejs python3 git sudo jq openssh-client \
         file ripgrep fd-find less tree make zip unzip time \
     && ln -sf /usr/bin/fdfind /usr/local/bin/fd \
     && apt-get purge -y --auto-remove gnupg \
@@ -47,6 +48,11 @@ RUN arch=${TARGETARCH:-$(uname -m)} && \
     curl -fsSL "https://github.com/mikefarah/yq/releases/latest/download/yq_linux_${yq_arch}" \
         -o /usr/local/bin/yq && \
     chmod +x /usr/local/bin/yq
+
+# Pre-populate GitHub host keys to avoid "Host key verification failed" on first git@github.com access
+RUN mkdir -p /etc/ssh \
+    && ssh-keyscan github.com >> /etc/ssh/ssh_known_hosts \
+    && chmod 644 /etc/ssh/ssh_known_hosts
 
 # Create agent user
 RUN groupadd -g ${GID} agent \

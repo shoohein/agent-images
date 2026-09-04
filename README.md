@@ -46,7 +46,7 @@ make build-all-force
 ### 基本ツール
 
 - 実行環境: `nodejs`, `python3`
-- 版管理・通信: `git`, `curl`
+- 版管理・通信: `git`, `curl`, `openssh-client` (`ssh`, `ssh-agent`, `ssh-add`)
 - 検索・整形・閲覧: `file`, `jq`, `ripgrep`, `fd`, `less`, `tree`, `yq`
 - ビルド・圧縮・計測: `make`, `unzip`, `zip`, `time`
 
