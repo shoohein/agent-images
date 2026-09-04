@@ -25,12 +25,12 @@ RUN apt-get update \
 # - nodejs/python3: runtime for agent CLIs and helper scripts
 # - keep python3 only; pip/venv/dev headers are intentionally omitted
 # - git/sudo/jq: repository and shell operations
-# - ripgrep/fd-find/less/tree: investigation and navigation
+# - file/ripgrep/fd-find/less/tree: investigation and navigation
 # - make/zip/unzip/time: build, packaging, and profiling helpers
 RUN apt-get update \
     && DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
         nodejs python3 git sudo jq \
-        ripgrep fd-find less tree make zip unzip time \
+        file ripgrep fd-find less tree make zip unzip time \
     && ln -sf /usr/bin/fdfind /usr/local/bin/fd \
     && apt-get purge -y --auto-remove gnupg \
     && apt-get clean \

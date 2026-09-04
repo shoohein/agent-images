@@ -47,7 +47,7 @@ make build-all-force
 
 - 実行環境: `nodejs`, `python3`
 - 版管理・通信: `git`, `curl`
-- 検索・整形・閲覧: `jq`, `ripgrep`, `fd`, `less`, `tree`, `yq`
+- 検索・整形・閲覧: `file`, `jq`, `ripgrep`, `fd`, `less`, `tree`, `yq`
 - ビルド・圧縮・計測: `make`, `unzip`, `zip`, `time`
 
 ## ライセンス
