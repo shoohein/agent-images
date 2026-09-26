@@ -10,6 +10,7 @@ AIコーディングエージェントのDockerイメージを管理するリポ
 | [Codex CLI](https://github.com/openai/codex) | `agent/codex` | [詳細](docs/guide/codex.md) |
 | [Claude Code](https://docs.anthropic.com/en/docs/claude-code) | `agent/claude` | [詳細](docs/guide/claude.md) |
 | [GitHub Copilot](https://docs.github.com/en/copilot) | `agent/copilot` | [詳細](docs/guide/copilot.md) |
+| [Pi Coding Agent](https://github.com/earendil-works/pi) | `agent/pi` | [詳細](docs/guide/pi.md) |
 
 ## 前提条件
 

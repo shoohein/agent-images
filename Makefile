@@ -1,4 +1,4 @@
-.PHONY: build-base build-opencode build-codex-cli build-claude-code build-copilot build-all build-all-force
+.PHONY: build-base build-opencode build-codex-cli build-claude-code build-copilot build-pi build-all build-all-force
 
 DOCKER_BUILD_BASE_FLAGS ?=
 DOCKER_BUILD_AGENT_FLAGS ?=
@@ -23,6 +23,9 @@ CLAUDE_CODE_IMAGE_NAME ?= agent/claude:$(CLAUDE_CODE_VERSION)
 
 COPILOT_VERSION ?= latest
 COPILOT_IMAGE_NAME ?= agent/copilot:$(COPILOT_VERSION)
+
+PI_VERSION ?= latest
+PI_IMAGE_NAME ?= agent/pi:$(PI_VERSION)
 
 build-base:
 	docker build $(DOCKER_BUILD_BASE_FLAGS) -f src/base/Dockerfile -t $(BASE_IMAGE_NAME) src/base
@@ -59,6 +62,14 @@ build-copilot: build-base
 		-t $(COPILOT_IMAGE_NAME) \
 		src/copilot
 
-build-all: build-base build-opencode build-codex-cli build-claude-code build-copilot
+build-pi: build-base
+	docker build $(DOCKER_BUILD_AGENT_FLAGS) \
+		-f src/pi/Dockerfile \
+		$(AGENT_BASE_BUILD_ARGS) \
+		--build-arg VERSION=$(PI_VERSION) \
+		-t $(PI_IMAGE_NAME) \
+		src/pi
+
+build-all: build-base build-opencode build-codex-cli build-claude-code build-copilot build-pi
 build-all-force:
 	$(MAKE) build-all FORCE=1

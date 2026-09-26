@@ -10,6 +10,7 @@
 - [Codex CLI](guide/codex.md)
 - [Claude Code](guide/claude.md)
 - [GitHub Copilot](guide/copilot.md)
+- [Pi Coding Agent](guide/pi.md)
 
 ## development/
 
